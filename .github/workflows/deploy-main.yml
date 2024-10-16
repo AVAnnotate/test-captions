@@ -93,7 +93,6 @@ jobs:
 
       - name: Build Astro Client
         uses: withastro/action@v2
-        if: ${{ env.project_publish_publish_pages_app == 'true' }}
         with:
           path: "./client"
 
@@ -104,3 +103,13 @@ jobs:
         env:
           name: github-pages
           url: ${{ steps.deployment.outputs.page_url }}
+
+      - name: Create an offline site
+        if: ${{ env.project_publish_publish_pages_app != 'true' }}
+        run: |
+          mv ./client/dist ./site
+          git config user.email "gitbot@avannotate.com"
+          git config user.name "GitHub Action Bot"
+          git add ./site
+          git commit -m 'Created offline site'
+          git push
