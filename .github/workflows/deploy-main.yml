@@ -91,6 +91,13 @@ jobs:
         if: ${{ env.project_publish_publish_pages_app == 'true' }}
         run: npx tsx ./client/generate-iiif-3-manifests.ts -d './data' -u "https://${{ github.repository_owner }}.github.io/${{ env.project_project_slug}}" -s 'false'
 
+      - name: Add relative links when building for offline site
+        if: ${{ env.project_publish_publish_pages_app != 'true' }}
+        run: |
+          cd ./client
+          npx astro add astro-relative-links
+          cd ..
+
       - name: Build Astro Client
         uses: withastro/action@v2
         with:
