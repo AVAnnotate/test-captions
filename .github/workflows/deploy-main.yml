@@ -106,6 +106,8 @@ jobs:
 
       - name: Create an offline site
         if: ${{ env.project_publish_publish_pages_app != 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           mv ./client/dist ./site
           git config user.email "gitbot@avannotate.com"
