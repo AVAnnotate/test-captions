@@ -115,8 +115,23 @@ jobs:
           git config user.name "GitHub Action Bot"
           touch ./site/run-mac.sh
           echo "
-            python3 -m http.server 
-          "
+            #!/bin/bash
+            echo 'Running AVAnnotate Site'
+            # Determine if python is installed
+            pythonV=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+            if [[ $pythonV == 3* ||  $pythonV == 2* ]]
+              then
+              ready=true
+              echo 'Python Installed'
+            else
+              echo 'Python Not Installed'
+            fi
+            if [[ $ready == true ]]
+            then
+              python3 -m http.server
+            fi
+          " >> ./site/run-mac.sh
           git add ./site
           git commit -m 'Created offline site'
           git push
+
