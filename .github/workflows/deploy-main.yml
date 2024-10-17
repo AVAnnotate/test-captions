@@ -113,6 +113,10 @@ jobs:
           mv ./client/dist ./site
           git config user.email "gitbot@avannotate.com"
           git config user.name "GitHub Action Bot"
+          touch ./site/run-mac.sh
+          echo "
+            python3 -m http.server 
+          "
           git add ./site
           git commit -m 'Created offline site'
           git push

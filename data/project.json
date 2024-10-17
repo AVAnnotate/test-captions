@@ -1,6 +1,6 @@
 {
   "publish": {
-    "publish_pages_app": true,
+    "publish_pages_app": false,
     "publish_sha": "",
     "publish_iso_date": ""
   },
