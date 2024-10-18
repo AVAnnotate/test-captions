@@ -118,15 +118,15 @@ jobs:
             #!/bin/bash
             echo 'Running AVAnnotate Site'
             # Determine if python is installed
-            pythonV=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
-            if [[ $pythonV == 3* ||  $pythonV == 2* ]]
+            pythonV=$$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+            if [[ $$pythonV == 3* ||  $$pythonV == 2* ]]
               then
               ready=true
               echo 'Python Installed'
             else
               echo 'Python Not Installed'
             fi
-            if [[ $ready == true ]]
+            if [[ $$ready == true ]]
             then
               python3 -m http.server
             fi
